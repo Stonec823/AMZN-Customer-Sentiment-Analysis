@@ -1,5 +1,4 @@
 import pandas as pd
-from google.cloud import storage
 import nltk
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -9,7 +8,6 @@ import re
 import logging
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-import gcsfs
 import swifter
 
 # Set up logging
@@ -156,7 +154,7 @@ def run_pureview_ai(file_path, num_rows=None, chunksize=10000):
 
 def output_pureview(df, bucket_name, destination_blob_name):
     """
-    Uploads the processed DataFrame to Google Cloud Storage.
+    outputs the file to csv
 
     Parameters
     ----------
@@ -164,28 +162,21 @@ def output_pureview(df, bucket_name, destination_blob_name):
         The DataFrame to upload.
     bucket_name : str
         The name of the GCS bucket.
-    destination_blob_name : str
-        The destination path for the file in the bucket.
 
     Returns
     -------
     None
     """
-    logging.info("Uploading results to GCS...")
-    local_path = '/tmp/pureview_ai.csv'
+    logging.info("Uploading results to CSV...")
+
+    local_path = './CSE-6242-Amazon-Review-Sentiment/data/pureview_ai.csv'
     df.to_csv(local_path, index=False)
     
-    client = storage.Client()
-    bucket = client.bucket(bucket_name)
-    blob = bucket.blob(destination_blob_name)
-    blob.upload_from_filename(local_path)
-    logging.info("Upload completed.")
-
 if __name__ == "__main__":
-    FILE_PATH = 'gs://amazon-home-and-kitchen/full_train_data.csv'
+    FILE_PATH = './CSE-6242-Amazon-Review-Sentiment/data/data.csv'
     BUCKET_NAME = 'amazon-home-and-kitchen'
     DESTINATION_BLOB_NAME = 'pureview_ai.csv'
-    NUM_ROWS = 500000
+    NUM_ROWS = 250000
     CHUNKSIZE = 10000
     
     final_df = run_pureview_ai(FILE_PATH, num_rows=NUM_ROWS, chunksize=CHUNKSIZE)
