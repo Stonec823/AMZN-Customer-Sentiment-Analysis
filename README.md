@@ -3,11 +3,16 @@
 
 This is team 184's repository to build a tableau dashboard with sentiment and topic modeling allowing users to filter on product attributes, review sentiment, review topic and text contained within user reviews. 
 
+Link to the dashboard here! -
+https://public.tableau.com/app/profile/oswaldo.ceballos/viz/PureViewAI/Dashboard1?publish=yes
+
 ## Data 
+For this project, we will use data from the below link for raw customer reviews for topic and sentiment modelling-
 https://amazon-reviews-2023.github.io/
 
 
 # Setup 
+To effectively develop this tool, our team used google cloud platform and Vertex AI. Below are the setup instructions.
 
 Go to GCP Vertex AI > Workbench > Managed notebooks https://console.cloud.google.com/vertex-ai/workbench/instances
 
