@@ -38,15 +38,14 @@ NOTE - **Whenever you pip install something new, like pandas, you will need to e
 conda env export > team184-env.yml
 ```
 
-#### Creating the conda kernel
+#### Creating the conda kernel:
 This essentially will allow us to use our conda env can be used in a jupyter notebook
 ```
 DL_ANACONDA_ENV_HOME="${DL_ANACONDA_HOME}/envs/team184-env"
 python -m ipykernel install --prefix "${DL_ANACONDA_ENV_HOME}" --name team184-env --display-name team184
 ```
 
-# Once the environment is setup, you should be able to run through our process
-1. Run 1_text_preprocessing.py
-2. Run 2_topic_processing.py
-3. Run 3_topic_processing.py
-
+# To simply run the pureview ETL process, be sure to activate team184-env and run the below command:
+```
+python ./CSE-6242-Amazon-Review-Sentiment/pureview.py
+```
